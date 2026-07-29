@@ -223,20 +223,26 @@
     .nav-toggle{ display:block; }
     section{ padding:56px 0; }
   }
-  @media (max-width: 768px) {
-  /* Footer main container ko column bana dein taake cheezein ek ke neechay aik aayein */
-  footer, .footer, .footer-container {
+ @media (max-width: 768px) {
+  /* Footer ko mobile par flexible column banayein */
+  footer, .footer {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     padding: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* Footer ke andar jitne bhi columns/divs hain unki width 100% kar dein */
-  footer div, .footer div, .footer-column {
+  /* Footer ke andar ke sections ya divs ki width set karein */
+  footer > div, .footer > div, .footer-col, .footer-column {
     width: 100% !important;
-    max-width: 100% !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 25px !important;
+  }
+
+  /* Horizontal scrolling ya overflow rokne ke liye */
+  body, html {
+    overflow-x: hidden !important;
   }
 }
 </style>
