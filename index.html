@@ -143,18 +143,25 @@
   .hero-image img{ width:100%; height:100%; object-fit:cover; filter:saturate(1.05) contrast(1.02); animation:heroDrift 14s ease-in-out infinite alternate; }
   .hero-image::before{ content:''; position:absolute; inset:0; background:linear-gradient(90deg, var(--umber) 0%, rgba(36,24,17,0) 12%); z-index:1; }
 
-  /* SWATCH RAIL */
-  .swatch-rail{ background:var(--umber); padding:0 0 30px 0; display:flex; justify-content:center; }
-  .swatch-rail-inner{ display:flex; gap:10px; align-items:center; background:var(--umber-2); padding:14px 20px; border-radius:14px; box-shadow:0 20px 40px rgba(0,0,0,0.35); border:1px solid var(--cream-line); }
-  .swatch{ width:42px; height:42px; border-radius:9px; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08); flex-shrink:0; cursor:pointer; transition:transform .18s ease; }
-  .swatch:hover{ transform:translateY(-4px) scale(1.05); }
-  .swatch-label{ font-family:'Space Mono', monospace; font-size:0.62rem; color:#a99a86; letter-spacing:0.08em; padding:0 6px; text-transform:uppercase; }
-
   section{ padding:92px 0; }
   .section-head{ text-align:center; max-width:680px; margin:0 auto 52px auto; }
   .section-head .eyebrow{ color:var(--rust); margin-bottom:12px; }
   .section-head h2{ font-size:2.3rem; font-weight:600; margin-bottom:14px; }
   .section-head p{ color:var(--ink-soft); font-size:1.03rem; }
+
+  /* ABOUT */
+  .about{ background:var(--plaster-2); }
+  .about-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:34px; align-items:stretch; }
+  .experience-card{ background:var(--umber); color:#fbf5ea; border-radius:20px; padding:38px; display:flex; flex-direction:column; justify-content:center; box-shadow:0 22px 48px var(--shadow); }
+  .experience-card .years{ font-family:'Fraunces',serif; font-size:5rem; line-height:.9; color:var(--brass); }
+  .experience-card h2{ color:#fbf5ea; margin:12px 0 8px; }
+  .experience-card p{ color:#d9cdb9; margin:0; }
+  .about-copy{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .about-panel{ background:var(--plaster); border:1px solid rgba(42,33,26,.1); border-radius:16px; padding:26px; }
+  .about-panel:first-child{ grid-column:1/-1; }
+  .about-panel i{ color:var(--rust); font-size:1.25rem; margin-bottom:12px; }
+  .about-panel h3{ margin-bottom:8px; }
+  .about-panel p{ color:var(--ink-soft); margin:0; }
 
   /* SERVICES */
   .services{ background:var(--plaster); }
@@ -174,7 +181,7 @@
   /* MORE SERVICES CHIPS */
   .more-services{ background:var(--plaster-2); }
   .chip-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
-  .chip{ background:var(--plaster); border:1px solid rgba(42,33,26,0.1); border-radius:12px; padding:18px 16px; display:flex; align-items:center; gap:12px; transition:transform .2s ease, border-color .2s ease; }
+  .chip{ width:100%; background:var(--plaster); color:var(--ink); border:1px solid rgba(42,33,26,0.1); border-radius:12px; padding:18px 16px; display:flex; align-items:center; gap:12px; transition:transform .2s ease, border-color .2s ease; font:inherit; text-align:left; cursor:pointer; }
   .chip:hover{ transform:translateY(-3px); border-color:var(--rust); }
   .chip i{ color:var(--rust); font-size:1.15rem; width:22px; text-align:center; }
   .chip span{ font-weight:600; font-size:0.9rem; }
@@ -237,6 +244,12 @@
   .contact-links{ display:grid; gap:11px; }
   .contact-links a{ display:flex; align-items:center; gap:10px; color:var(--ink); font-weight:700; overflow-wrap:anywhere; }
   .contact-links i{ width:22px; color:var(--rust); text-align:center; }
+  .quote-form{ display:grid; gap:13px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .quote-form label{ display:grid; gap:6px; color:var(--ink); font-size:.82rem; font-weight:700; }
+  .quote-form input,.quote-form select,.quote-form textarea{ width:100%; border:1px solid rgba(127,119,110,.32); background:var(--plaster); color:var(--ink); border-radius:10px; padding:11px 12px; font:inherit; font-size:.9rem; }
+  .quote-form textarea{ min-height:94px; resize:vertical; }
+  .quote-form button{ border:0; cursor:pointer; justify-content:center; }
   .location-panel{ max-width:900px; margin:24px auto 0; background:linear-gradient(135deg,var(--plaster-2),var(--plaster)); border:1px solid rgba(127,119,110,.22); border-radius:18px; box-shadow:0 16px 36px var(--shadow); }
   .location-copy{ padding:26px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
   .location-copy h3{ margin-bottom:4px; }
@@ -245,6 +258,19 @@
   .location-actions .btn-book{ justify-content:center; }
   .btn-location-secondary{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 18px; color:var(--ink); background:transparent; border:1px solid rgba(127,119,110,.35); border-radius:999px; font-size:.85rem; font-weight:700; transition:transform .2s ease,background-color .2s ease; white-space:nowrap; }
   .btn-location-secondary:hover{ transform:translateY(-2px); background:var(--plaster-2); }
+
+  /* SERVICE + PRIVACY DIALOGS */
+  .site-dialog{ border:0; padding:0; width:min(720px,calc(100% - 28px)); max-height:88vh; overflow:auto; border-radius:20px; color:var(--ink); background:var(--plaster-2); box-shadow:0 30px 80px rgba(0,0,0,.36); }
+  .site-dialog::backdrop{ background:rgba(32,27,24,.68); backdrop-filter:blur(5px); }
+  .dialog-head{ position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 24px; background:var(--umber); color:#fff; }
+  .dialog-head h2{ color:#fff; font-size:1.5rem; }
+  .dialog-close{ width:38px; height:38px; border:1px solid rgba(255,255,255,.24); border-radius:50%; background:transparent; color:#fff; cursor:pointer; font-size:1.05rem; }
+  .dialog-body{ padding:26px; }
+  .dialog-body p{ color:var(--ink-soft); }
+  .service-preview{ width:100%; height:290px; object-fit:cover; border-radius:14px; margin:18px 0; }
+  .dialog-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+  .privacy-copy h3{ margin:22px 0 6px; }
+  .privacy-copy p{ margin:0; }
 
   /* EVENTS */
   .events{ background:var(--umber); color:var(--plaster-2); }
@@ -259,7 +285,7 @@
 
   /* TEAM */
   .team{ background:var(--plaster); }
-  .team-grid{ display:grid; grid-template-columns:repeat(5, 1fr); gap:22px; }
+  .team-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; }
   .team-card{ text-align:center; }
   .team-card img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; margin-bottom:14px; box-shadow:0 14px 24px rgba(36,24,17,0.12); }
   .team-card h4{ font-size:1rem; font-weight:600; margin-bottom:3px; }
@@ -321,10 +347,6 @@
   @keyframes curtainRollLeft{ 0%{ transform:translateX(0) scaleX(1); } 65%{ transform:translateX(-64%) scaleX(.38); } 100%{ transform:translateX(-98%) scaleX(.08); opacity:0; } }
   @keyframes curtainRollRight{ 0%{ transform:translateX(0) scaleX(1); } 65%{ transform:translateX(64%) scaleX(.38); } 100%{ transform:translateX(98%) scaleX(.08); opacity:0; } }
 
-  /* ---------- SWATCH RAIL entrance ---------- */
-  .swatch-rail-inner .swatch{ opacity:0; transform:translateY(14px) scale(0.8); animation:swatchIn 0.5s ease forwards; }
-  @keyframes swatchIn{ to{ opacity:1; transform:translateY(0) scale(1); } }
-
   @media (max-width: 991px){
     .hero{ grid-template-columns:1fr; min-height:auto; }
     .hero-image{ height:320px; order:-1; }
@@ -336,6 +358,7 @@
     .stats-inner{ grid-template-columns:repeat(2,1fr); row-gap:22px; }
     .stat{ border-right:none; border-bottom:1px solid rgba(237,226,206,0.15); padding-bottom:14px; }
     .picker-grid{ grid-template-columns:1fr; }
+    .about-grid{ grid-template-columns:1fr; }
     .testi-grid{ grid-template-columns:1fr; }
     .process-grid{ grid-template-columns:repeat(2,1fr); }
     .contact-grid{ grid-template-columns:1fr; }
@@ -363,6 +386,11 @@
     .nav-toggle{ flex:0 0 40px; width:40px; height:40px; padding:0; cursor:pointer; }
 
     .container-narrow{ width:100%; padding-left:20px; padding-right:20px; }
+    .about-copy{ grid-template-columns:1fr; }
+    .about-panel:first-child{ grid-column:auto; }
+    .experience-card{ padding:30px 24px; }
+    .experience-card .years{ font-size:4.2rem; }
+    .form-row{ grid-template-columns:1fr; }
     .section-head{ margin-bottom:36px; }
     .section-head h2{ font-size:1.85rem; line-height:1.2; }
 
@@ -443,6 +471,7 @@
     </a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation menu" aria-controls="navLinks" aria-expanded="false"><i class="fas fa-bars"></i></button>
     <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#products">Products</a>
       <a href="#events">Events</a>
@@ -479,17 +508,35 @@
   </div>
 </header>
 
-<!-- SWATCH RAIL -->
-<div class="swatch-rail">
-  <div class="swatch-rail-inner">
-    <span class="swatch-label">Our Palette</span>
-    <div class="swatch" style="background:#9C3B24; animation-delay:.55s;" title="Brick Rust"></div>
-    <div class="swatch" style="background:#33473A; animation-delay:.63s;" title="Bottle Green"></div>
-    <div class="swatch" style="background:#B08D3E; animation-delay:.71s;" title="Brass"></div>
-    <div class="swatch" style="background:#5b4638; animation-delay:.79s;" title="Walnut"></div>
-    <div class="swatch" style="background:#c9b89a; animation-delay:.87s;" title="Linen"></div>
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container-narrow">
+    <div class="about-grid">
+      <div class="experience-card on-scroll">
+        <span class="years">6</span>
+        <h2>Years of Experience</h2>
+        <p>Serving homes, offices and event spaces with made-to-measure furnishing and repair work in Riyadh.</p>
+      </div>
+      <div class="about-copy">
+        <article class="about-panel on-scroll">
+          <i class="fas fa-house-chimney"></i>
+          <h3>About Premium Sofa Curtain</h3>
+          <p>We provide curtains, blinds, sofa and majlis upholstery, furniture repair and interior furnishing services across Riyadh. Our team supports each project from measurement and material selection through preparation and fitting.</p>
+        </article>
+        <article class="about-panel on-scroll">
+          <i class="fas fa-bullseye"></i>
+          <h3>Our Mission</h3>
+          <p>To deliver dependable workmanship, practical material guidance and comfortable finishes suited to every client’s space.</p>
+        </article>
+        <article class="about-panel on-scroll">
+          <i class="fas fa-eye"></i>
+          <h3>Our Vision</h3>
+          <p>To be a trusted Riyadh furnishing partner known for responsive service, careful fitting and lasting results.</p>
+        </article>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- SERVICES -->
 <section id="services" class="services">
@@ -544,16 +591,14 @@
       <h2 style="font-size:1.9rem;">More Ways We Can Help</h2>
     </div>
     <div class="chip-grid">
-      <div class="chip on-scroll"><i class="fas fa-scissors"></i><span>Curtain Stitching</span></div>
-      <div class="chip on-scroll"><i class="fas fa-ruler-combined"></i><span>Curtain Measurement</span></div>
-      <div class="chip on-scroll"><i class="fas fa-tools"></i><span>Curtain Installation</span></div>
-      <div class="chip on-scroll"><i class="fas fa-layer-group"></i><span>Fabric Selection</span></div>
-      <div class="chip on-scroll"><i class="fas fa-couch"></i><span>Majlis Upholstery</span></div>
-      <div class="chip on-scroll"><i class="fas fa-user-tie"></i><span>Office Chair Upholstery</span></div>
-      <div class="chip on-scroll"><i class="fas fa-chair"></i><span>Dining Chair Upholstery</span></div>
-      <div class="chip on-scroll"><i class="fas fa-hammer"></i><span>Sofa Frame Repair</span></div>
-      <div class="chip on-scroll"><i class="fas fa-fill"></i><span>Foam Replacement</span></div>
-      <div class="chip on-scroll"><i class="fas fa-tag"></i><span>Leather Upholstery</span></div>
+      <button class="chip service-trigger on-scroll" type="button" data-service="sofa-repair"><i class="fas fa-hammer"></i><span>Sofa Repair</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="sofa-upholstery"><i class="fas fa-couch"></i><span>Sofa Upholstery</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="curtain-stitching"><i class="fas fa-scissors"></i><span>Curtain Stitching</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="curtain-installation"><i class="fas fa-tools"></i><span>Curtain Installation</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="blinds"><i class="fas fa-window-maximize"></i><span>Blinds</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="wallpaper"><i class="fas fa-paint-roller"></i><span>Wallpaper</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="carpet"><i class="fas fa-rug"></i><span>Carpet</span></button>
+      <button class="chip service-trigger on-scroll" type="button" data-service="cushion-covers"><i class="fas fa-layer-group"></i><span>Cushion Covers</span></button>
     </div>
   </div>
 </section>
@@ -583,6 +628,18 @@
           <button type="button" class="picker-tab" data-img="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.33.07-AM.jpeg" data-name="Sofa Upholstery" aria-pressed="false">
             <span class="tab-icon"><i class="fas fa-scissors"></i></span>
             <span><span class="tab-title">Sofa Upholstery</span><span class="tab-sub">Fresh fabric, rebuilt frame</span></span>
+          </button>
+          <button type="button" class="picker-tab" data-img="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.32.29-AM-1.jpeg" data-name="Before & After Repair" aria-pressed="false">
+            <span class="tab-icon"><i class="fas fa-arrows-rotate"></i></span>
+            <span><span class="tab-title">Before & After</span><span class="tab-sub">Furniture repair and renewal</span></span>
+          </button>
+          <button type="button" class="picker-tab" data-img="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.32.29-AM-5-1.jpeg" data-name="Bedroom Curtains" aria-pressed="false">
+            <span class="tab-icon"><i class="fas fa-bed"></i></span>
+            <span><span class="tab-title">Bedroom</span><span class="tab-sub">Privacy and blackout curtains</span></span>
+          </button>
+          <button type="button" class="picker-tab" data-img="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.33.07-AM-2.jpeg" data-name="Office Furnishing" aria-pressed="false">
+            <span class="tab-icon"><i class="fas fa-briefcase"></i></span>
+            <span><span class="tab-title">Office</span><span class="tab-sub">Commercial seating upholstery</span></span>
           </button>
           <button type="button" class="picker-tab" data-img="https://premiumsofacurtain.com/wp-content/uploads/2026/06/Corporate_event_lounge_setup_Riyadh_202606040835.jpeg" data-name="Event Lounge Setup" aria-pressed="false">
             <span class="tab-icon"><i class="fas fa-building"></i></span>
@@ -642,9 +699,13 @@
     </div>
     <div class="process-grid">
       <div class="process-step on-scroll"><div class="process-num">01</div><h3>Contact Us</h3><p>Send photos and requirements by WhatsApp or call the team directly.</p></div>
-      <div class="process-step on-scroll"><div class="process-num">02</div><h3>Measure & Select</h3><p>Measurements and fabric or material options are confirmed for the project.</p></div>
-      <div class="process-step on-scroll"><div class="process-num">03</div><h3>Receive a Quote</h3><p>The quotation is prepared according to size, material and required work.</p></div>
-      <div class="process-step on-scroll"><div class="process-num">04</div><h3>Complete & Fit</h3><p>The approved work is prepared, finished and installed where applicable.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">02</div><h3>Arrange a Visit</h3><p>Measurement-visit availability and any applicable visit terms are confirmed with the client.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">03</div><h3>Measurements</h3><p>The required dimensions are recorded for accurate preparation and fitting.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">04</div><h3>Fabric Selection</h3><p>Choose suitable fabric, colour, texture and finish with practical guidance from the team.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">05</div><h3>Receive a Quote</h3><p>The quotation is prepared according to size, selected material and required work.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">06</div><h3>Work Begins</h3><p>Preparation, stitching, upholstery or repair starts after the quotation is approved.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">07</div><h3>Installation</h3><p>The completed work is delivered and professionally fitted where installation is included.</p></div>
+      <div class="process-step on-scroll"><div class="process-num">08</div><h3>Final Check</h3><p>The result is reviewed with the customer and any agreed finishing points are confirmed.</p></div>
     </div>
   </div>
 </section>
@@ -672,7 +733,16 @@
     <div class="section-head">
       <span class="eyebrow">Our service team</span>
       <h2>Craftsmanship at Every Stage</h2>
-      <p>Your project is handled through measurement, material selection, stitching or upholstery, repair and final fitting. Individual team profiles can be added when the client provides approved names and photographs.</p>
+      <p>Meet the designers, craftsmen, tailors and installation specialists presented on the official Premium Sofa Curtain website.</p>
+    </div>
+    <div class="team-grid">
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM.jpeg" alt="Shoaib Raja"><h4>Shoaib Raja</h4><p>Managing Director</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-4.jpeg" alt="Umair Basheer"><h4>Umair Basheer</h4><p>Manager</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-5.jpeg" alt="Abdul Jalal"><h4>Abdul Jalal</h4><p>Project Handler</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-3.jpeg" alt="Azhar Khan"><h4>Azhar Khan</h4><p>Tailor</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-2.jpeg" alt="Qasim Raja"><h4>Qasim Raja</h4><p>Installation Worker</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-1.jpeg" alt="Raja Sahib"><h4>Raja Sahib</h4><p>Installer</p></article>
+      <article class="team-card on-scroll"><img src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-03-at-8.36.57-PM-6.jpeg" alt="Haider Raja"><h4>Haider Raja</h4><p>Installation Worker</p></article>
     </div>
   </div>
 </section>
@@ -726,11 +796,24 @@
         </div>
       </div>
       <div class="contact-card">
-        <h3>Google Reviews</h3>
-        <p>If you have used the service, share genuine feedback on the official Google profile.</p>
-        <div class="contact-links">
-          <a href="https://g.page/r/CWRzGJuUvsn5EBE/review" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i>Post a Google review</a>
-        </div>
+        <h3>Quick Quotation Request</h3>
+        <p>Complete the details below and continue securely through WhatsApp.</p>
+        <form class="quote-form" id="quoteForm">
+          <div class="form-row">
+            <label>Your name<input id="quoteName" type="text" autocomplete="name" required></label>
+            <label>Phone number<input id="quotePhone" type="tel" autocomplete="tel" required></label>
+          </div>
+          <label>Required service
+            <select id="quoteService" required>
+              <option value="">Select a service</option>
+              <option>Sofa Repair</option><option>Sofa Upholstery</option><option>Curtain Stitching</option>
+              <option>Curtain Installation</option><option>Blinds</option><option>Wallpaper</option>
+              <option>Carpet</option><option>Cushion Covers</option>
+            </select>
+          </label>
+          <label>Project details<textarea id="quoteDetails" placeholder="Tell us about the item, room, approximate size or preferred material." required></textarea></label>
+          <button class="btn-book" type="submit"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+        </form>
       </div>
     </div>
     <div class="location-panel">
@@ -770,6 +853,38 @@
 </section>
 </main>
 
+<dialog class="site-dialog" id="serviceDialog" aria-labelledby="serviceDialogTitle">
+  <div class="dialog-head">
+    <h2 id="serviceDialogTitle">Service Details</h2>
+    <button class="dialog-close" type="button" data-close-dialog aria-label="Close service details"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="dialog-body">
+    <p id="serviceDialogText"></p>
+    <img class="service-preview" id="serviceDialogImage" src="https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.32.29-AM-4.jpeg" alt="Service work example">
+    <p><small>Additional service-specific project photographs will be added when the client supplies the approved originals.</small></p>
+    <div class="dialog-actions">
+      <a class="btn-book" id="serviceWhatsApp" href="https://wa.me/966535723963" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Quote</a>
+      <a class="btn-location-secondary" href="tel:+966535723963"><i class="fas fa-phone"></i> Call Now</a>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="site-dialog" id="privacyDialog" aria-labelledby="privacyDialogTitle">
+  <div class="dialog-head">
+    <h2 id="privacyDialogTitle">Privacy Policy</h2>
+    <button class="dialog-close" type="button" data-close-dialog aria-label="Close privacy policy"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="dialog-body privacy-copy">
+    <p>This website only collects information that you voluntarily enter into the quotation form. The form prepares a WhatsApp message on your device; the website does not store the submitted information in a database.</p>
+    <h3>Contact information</h3>
+    <p>Information shared through WhatsApp, telephone or email is used to respond to enquiries, prepare quotations and coordinate requested services.</p>
+    <h3>External services</h3>
+    <p>Links to WhatsApp, Google Maps and Google Reviews are operated by their respective providers and are subject to those providers’ privacy policies.</p>
+    <h3>Questions</h3>
+    <p>For privacy questions, contact <a href="mailto:matwallikhan@gmail.com">matwallikhan@gmail.com</a>.</p>
+  </div>
+</dialog>
+
 <!-- FOOTER -->
 <footer>
   <div class="container-narrow">
@@ -783,6 +898,9 @@
         <div class="foot-social" style="margin-left:-14px; margin-top:10px;">
           <a href="https://g.page/r/CWRzGJuUvsn5EBE/review" target="_blank" rel="noopener noreferrer" aria-label="Google reviews"><i class="fab fa-google"></i></a>
           <a href="https://wa.me/966535723963?text=Hello%2C%20I%20would%20like%20a%20quotation." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/share/18bQNzsjLe/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/permiumsofacurtain/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@premiumsofacurtain" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
       </div>
       <div class="foot-col">
@@ -794,6 +912,7 @@
         <a href="#process">Process</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
+        <a href="#" id="privacyLink">Privacy Policy</a>
       </div>
       <div class="foot-col">
         <h5>Get in touch</h5>
@@ -805,7 +924,6 @@
     </div>
     <div class="foot-bottom">
       <span>&copy; 2026 Premium Sofa Curtain Riyadh. All rights reserved.</span>
-      <span>Contact information provided by the client.</span>
     </div>
   </div>
 </footer>
@@ -823,38 +941,49 @@
 
   const arabicText = {
     'Skip to main content':'تخطي إلى المحتوى الرئيسي',
-    'Services':'الخدمات','Products':'المنتجات','Events':'المناسبات','Team':'فريق العمل',
+    'About':'من نحن','Services':'الخدمات','Products':'المنتجات','Events':'المناسبات','Team':'فريق العمل',
     'Contact Now':'تواصل الآن','Contact Now on WhatsApp':'تواصل الآن عبر واتساب',
     "Riyadh's Trusted Interior Furnishing Experts":'خبراء موثوقون للمفروشات الداخلية في الرياض',
     'Every room deserves to feel like a':'كل غرفة تستحق أن تشعر بأنها',
     'warm, finished home.':'منزل دافئ ومتكامل.',
     'Custom sofa upholstery, luxury curtains and modern blinds for homes, offices and events across Riyadh — fitted by our own team of tailors and installers, start to finish.':'تنجيد كنب مخصص وستائر فاخرة وحلول عصرية للمنازل والمكاتب والمناسبات في الرياض، ينفذها فريقنا من القياس حتى التركيب.',
-    'Our Palette':'ألواننا','What we do':'ماذا نقدم',
+    'Years of Experience':'سنوات من الخبرة',
+    'Serving homes, offices and event spaces with made-to-measure furnishing and repair work in Riyadh.':'نخدم المنازل والمكاتب ومساحات المناسبات بأعمال المفروشات والإصلاح حسب الطلب في الرياض.',
+    'About Premium Sofa Curtain':'عن بريميوم سوفا كرتن',
+    'We provide curtains, blinds, sofa and majlis upholstery, furniture repair and interior furnishing services across Riyadh. Our team supports each project from measurement and material selection through preparation and fitting.':'نقدم خدمات الستائر والستائر العصرية وتنجيد الكنب والمجالس وإصلاح الأثاث والمفروشات الداخلية في الرياض، من القياس واختيار المواد حتى التجهيز والتركيب.',
+    'Our Mission':'رسالتنا','Our Vision':'رؤيتنا',
+    'To deliver dependable workmanship, practical material guidance and comfortable finishes suited to every client’s space.':'تقديم حرفية موثوقة وإرشاد عملي لاختيار المواد وتشطيبات مريحة تناسب مساحة كل عميل.',
+    'To be a trusted Riyadh furnishing partner known for responsive service, careful fitting and lasting results.':'أن نكون شريكًا موثوقًا للمفروشات في الرياض بخدمة سريعة وتركيب دقيق ونتائج تدوم.',
+    'What we do':'ماذا نقدم',
     'Complete Interior Furnishing, Under One Roof':'حلول متكاملة للمفروشات الداخلية',
     'From a single re-upholstered sofa to a full villa fit-out — our craftsmen handle curtains, blinds, upholstery and repair for homes, offices, hotels and events across Riyadh.':'من تجديد كنب واحد إلى تجهيز المساحات بالكامل، نقدم الستائر والتنجيد والإصلاح للمنازل والمكاتب والمناسبات في الرياض.',
     'Custom Curtains':'ستائر حسب الطلب','Sofa Upholstery':'تنجيد الكنب','Majlis Upholstery':'تنجيد المجالس','Chair & Sofa Repair':'إصلاح الكراسي والكنب',
     'Request a quote':'اطلب عرض سعر','Also available':'خدمات إضافية','More Ways We Can Help':'خدمات أخرى نقدمها',
     'Curtain Stitching':'تفصيل الستائر','Curtain Measurement':'قياس الستائر','Curtain Installation':'تركيب الستائر','Fabric Selection':'اختيار الأقمشة',
+    'Sofa Repair':'إصلاح الكنب','Blinds':'الستائر العصرية','Wallpaper':'ورق الجدران','Carpet':'السجاد','Cushion Covers':'أغطية الوسائد',
     'Office Chair Upholstery':'تنجيد كراسي المكتب','Dining Chair Upholstery':'تنجيد كراسي الطعام','Sofa Frame Repair':'إصلاح هيكل الكنب','Foam Replacement':'تغيير الإسفنج','Leather Upholstery':'تنجيد الجلد',
     'Measurements & consultation':'القياس والاستشارة','Fabric selection support':'مساعدة في اختيار القماش','Professional fitting & repair':'تركيب وإصلاح احترافي',
     'Explore our work':'اكتشف أعمالنا','See the quality in every room.':'شاهد الجودة في كل مساحة.',
     "Tap a category to see real projects we've completed across Riyadh — from living rooms to full event setups.":'اختر فئة لمشاهدة نماذج من أعمالنا في الرياض.',
-    'Living Room':'غرفة المعيشة','Sofa Upholstery':'تنجيد الكنب','Event Lounge':'مجلس مناسبات','Wedding Setup':'تجهيز حفلات الزفاف','Villa Interior':'ديكور الفيلا',
+    'Living Room':'غرفة المعيشة','Sofa Upholstery':'تنجيد الكنب','Before & After':'قبل وبعد','Bedroom':'غرفة النوم','Office':'المكتب','Event Lounge':'مجلس مناسبات','Wedding Setup':'تجهيز حفلات الزفاف','Villa Interior':'ديكور الفيلا',
     'Shop online':'المنتجات','Featured Products':'منتجات مختارة','A few pieces from our online shop — full range available on the site.':'مجموعة مختارة من منتجاتنا وخدماتنا.',
     'Custom Curtains & Blinds':'ستائر وحلول نوافذ حسب الطلب','Custom Sofa Upholstery':'تنجيد كنب حسب الطلب','Blackout Curtains':'ستائر بلاك أوت','Get Quote':'اطلب السعر',
     'How it works':'طريقة العمل','A Clear Process, From Measurement to Fitting':'خطوات واضحة من القياس إلى التركيب',
-    'Contact Us':'تواصل معنا','Measure & Select':'القياس والاختيار','Receive a Quote':'استلام عرض السعر','Complete & Fit':'التنفيذ والتركيب',
+    'Contact Us':'تواصل معنا','Arrange a Visit':'تنسيق الزيارة','Measurements':'القياسات','Fabric Selection':'اختيار القماش','Receive a Quote':'استلام عرض السعر','Work Begins':'بدء العمل','Installation':'التركيب','Final Check':'الفحص النهائي',
     'Events in Riyadh':'مناسبات الرياض','Furniture & Décor for Every Occasion':'أثاث وديكور لكل مناسبة',
     'Meet the team':'فريق الخدمة','Our service team':'فريق الخدمة','Craftsmanship at Every Stage':'حرفية في كل مرحلة',
+    'Managing Director':'المدير العام','Manager':'المدير','Project Handler':'مسؤول المشاريع','Tailor':'الخياط','Installation Worker':'عامل تركيب','Installer':'فني تركيب',
     'Customer feedback':'آراء العملاء','Worked With Us? Share Your Experience':'تعاملت معنا؟ شارك تجربتك','Post a Google Review':'أضف تقييمك على جوجل',
     'Frequently asked questions':'الأسئلة الشائعة','Helpful Information Before You Book':'معلومات مهمة قبل الطلب',
     'How can I get a price?':'كيف أحصل على السعر؟','Do you provide measurements?':'هل توفرون خدمة القياس؟','How long does the work take?':'كم يستغرق تنفيذ العمل؟','Is a warranty included?':'هل يوجد ضمان؟',
     'Contact':'التواصل','Request Measurements or a Quotation':'اطلب القياس أو عرض السعر','Contact the Team':'تواصل مع الفريق','WhatsApp quotation':'طلب عرض سعر عبر واتساب',
+    'Quick Quotation Request':'طلب عرض سعر سريع','Complete the details below and continue securely through WhatsApp.':'أكمل التفاصيل أدناه ثم تابع بأمان عبر واتساب.',
+    'Your name':'الاسم','Phone number':'رقم الهاتف','Required service':'الخدمة المطلوبة','Select a service':'اختر الخدمة','Project details':'تفاصيل المشروع','Send via WhatsApp':'إرسال عبر واتساب',
     'Google Reviews':'تقييمات جوجل','Post a Google review':'أضف تقييمًا على جوجل','Our location':'موقعنا','Open in Google Maps':'افتح في خرائط جوجل','Get Directions':'الحصول على الاتجاهات',
     'Ready to transform your space?':'هل أنت مستعد لتجديد مساحتك؟','Explore':'استكشف','Get in touch':'تواصل معنا',
-    'Process':'خطوات العمل','FAQ':'الأسئلة الشائعة','Google review profile':'صفحة تقييمات جوجل',
+    'Process':'خطوات العمل','FAQ':'الأسئلة الشائعة','Privacy Policy':'سياسة الخصوصية','Google review profile':'صفحة تقييمات جوجل',
     'Sofa upholstery, curtains, majlis seating and chair repair services in Riyadh, Saudi Arabia.':'خدمات تنجيد الكنب والستائر والمجالس وإصلاح الكراسي في الرياض، المملكة العربية السعودية.',
-    'All rights reserved.':'جميع الحقوق محفوظة.','Contact information provided by the client.':'معلومات التواصل مقدمة من العميل.'
+    'All rights reserved.':'جميع الحقوق محفوظة.'
   };
 
   const translatableNodes = [];
@@ -921,6 +1050,100 @@
       navToggle.setAttribute('aria-expanded', 'false');
       navToggle.setAttribute('aria-label', document.documentElement.lang === 'ar' ? 'فتح قائمة التنقل' : 'Open navigation menu');
     }
+  });
+
+  const serviceDialog = document.getElementById('serviceDialog');
+  const serviceDialogTitle = document.getElementById('serviceDialogTitle');
+  const serviceDialogText = document.getElementById('serviceDialogText');
+  const serviceDialogImage = document.getElementById('serviceDialogImage');
+  const serviceWhatsApp = document.getElementById('serviceWhatsApp');
+  const serviceCatalog = {
+    'sofa-repair': {
+      title:'Sofa Repair', ar:'إصلاح الكنب',
+      text:'Repair for broken frames, sagging cushions, damaged legs, worn foam and torn upholstery, with the work assessed according to the item’s condition.',
+      arText:'إصلاح هياكل الكنب والوسائد الهابطة والأرجل التالفة والإسفنج والأقمشة حسب حالة القطعة.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.32.29-AM.jpeg'
+    },
+    'sofa-upholstery': {
+      title:'Sofa Upholstery', ar:'تنجيد الكنب',
+      text:'Professional sofa re-upholstery using selected fabrics or leather to renew comfort, appearance and durability.',
+      arText:'تنجيد احترافي للكنب باستخدام الأقمشة أو الجلد المختار لتجديد الراحة والمظهر والمتانة.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.33.07-AM.jpeg'
+    },
+    'curtain-stitching': {
+      title:'Curtain Stitching', ar:'تفصيل الستائر',
+      text:'Made-to-measure curtain preparation with fabric, heading and finish selected for the room and window.',
+      arText:'تفصيل ستائر حسب القياس مع اختيار القماش وطريقة التعليق والتشطيب المناسب للغرفة والنافذة.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-5.32.29-AM-4.jpeg'
+    },
+    'curtain-installation': {
+      title:'Curtain Installation', ar:'تركيب الستائر',
+      text:'Measurement support and professional fitting for curtain tracks, rods and completed curtains where included in the quotation.',
+      arText:'دعم القياس والتركيب الاحترافي لمسارات وقضبان وستائر المشروع حسب عرض السعر.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-04-at-9.20.31-PM-1.jpeg'
+    },
+    'blinds': {
+      title:'Blinds', ar:'الستائر العصرية',
+      text:'Custom-fitted roller, zebra, vertical and Venetian blind options for privacy and light control in homes and offices.',
+      arText:'خيارات ستائر رول وزيبرا ورأسية وفينيسية حسب القياس للتحكم في الضوء والخصوصية للمنازل والمكاتب.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/Luxury_roller_blinds_Riyadh_villa_202606042329.jpeg'
+    },
+    'wallpaper': {
+      title:'Wallpaper', ar:'ورق الجدران',
+      text:'Wallpaper service availability, material options and installation terms require confirmation from the team before quotation.',
+      arText:'يرجى تأكيد توفر خدمة ورق الجدران وخيارات المواد وشروط التركيب مع الفريق قبل عرض السعر.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/Luxury_villa_interior_Riyadh_202606040909-1.jpeg'
+    },
+    'carpet': {
+      title:'Carpet', ar:'السجاد',
+      text:'Carpet supply or fitting availability and product specifications require confirmation from the team before quotation.',
+      arText:'يرجى تأكيد توفر السجاد أو تركيبه ومواصفات المنتجات مع الفريق قبل عرض السعر.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/Luxury_villa_interior_Riyadh_202606040909-1.jpeg'
+    },
+    'cushion-covers': {
+      title:'Cushion Covers', ar:'أغطية الوسائد',
+      text:'Custom cushion-cover availability, sizes, fabric choices and finishing details require confirmation before quotation.',
+      arText:'يرجى تأكيد توفر أغطية الوسائد حسب الطلب والمقاسات وخيارات القماش والتشطيب قبل عرض السعر.',
+      image:'https://premiumsofacurtain.com/wp-content/uploads/2026/06/Luxury_L-shape_sofa_set_202606042318.jpeg'
+    }
+  };
+
+  document.querySelectorAll('.service-trigger').forEach((button) => {
+    button.addEventListener('click', () => {
+      const service = serviceCatalog[button.dataset.service];
+      const isArabic = document.documentElement.lang === 'ar';
+      serviceDialogTitle.textContent = isArabic ? service.ar : service.title;
+      serviceDialogText.textContent = isArabic ? service.arText : service.text;
+      serviceDialogImage.src = service.image;
+      serviceDialogImage.alt = isArabic ? service.ar : service.title;
+      const message = `Hello, I would like a quotation for ${service.title}.`;
+      serviceWhatsApp.href = `https://wa.me/966535723963?text=${encodeURIComponent(message)}`;
+      serviceDialog.showModal();
+    });
+  });
+
+  const privacyDialog = document.getElementById('privacyDialog');
+  document.getElementById('privacyLink').addEventListener('click', (event) => {
+    event.preventDefault();
+    privacyDialog.showModal();
+  });
+  document.querySelectorAll('[data-close-dialog]').forEach((button) => {
+    button.addEventListener('click', () => button.closest('dialog').close());
+  });
+  document.querySelectorAll('dialog').forEach((dialog) => {
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+
+  document.getElementById('quoteForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('quoteName').value.trim();
+    const phone = document.getElementById('quotePhone').value.trim();
+    const service = document.getElementById('quoteService').value;
+    const details = document.getElementById('quoteDetails').value.trim();
+    const message = `Quotation request\nName: ${name}\nPhone: ${phone}\nService: ${service}\nDetails: ${details}`;
+    window.open(`https://wa.me/966535723963?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   });
 
   // logo click animation — fun spin + pulse each time it's tapped
