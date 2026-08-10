@@ -1,0 +1,16 @@
+BAIT AL-NU'AS NEXT.JS WEBSITE
+============================
+
+METHOD 1 — EASIEST ON WINDOWS
+1. Install Node.js 20 or newer.
+2. Double-click START_WEBSITE.bat.
+3. Open http://localhost:3000 in your browser.
+
+METHOD 2 — TERMINAL
+1. Open this folder in VS Code.
+2. Open Terminal.
+3. Run: npm install
+4. Run: npm run dev
+5. Open: http://localhost:3000
+
+The website now uses real Next.js pages. Do not double-click an HTML file.
