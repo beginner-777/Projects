@@ -1,0 +1,80 @@
+/* Advanced Loader — full-bleed / navy-cream.
+   Recreated from the referenced demo's morph-icon mechanic: a device
+   outline (laptop -> watch -> phone) strokes itself in, holds, fades,
+   and the next device draws in. Runs on real page-load state, not a
+   fixed timer alone (see SiteLoader.tsx). */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050608;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(239, 230, 210, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.iconSvg {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: visible;
+}
+
+.icon {
+  opacity: 0;
+}
+
+.active {
+  opacity: 1;
+}
+
+.icon rect,
+.icon circle,
+.icon line {
+  fill: none;
+  stroke: #efe6d2;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.name {
+  position: relative;
+  margin-top: 28px;
+  font-weight: 800;
+  font-size: 22px;
+  color: #f2efee;
+  letter-spacing: -0.01em;
+}
+
+.nameAccent {
+  color: #4a6b9e;
+}
+
+.status {
+  position: relative;
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #767a82;
+  text-transform: uppercase;
+}

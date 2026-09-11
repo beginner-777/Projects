@@ -1,0 +1,59 @@
+import { EXPERIENCE } from "@/data/experience";
+import Reveal from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
+import TiltCard from "@/components/motion/TiltCard";
+
+export default function Experience() {
+  return (
+    <section id="experience" className="scroll-mt-24 border-b border-ink/[0.07]">
+      <div className="mx-auto max-w-6xl px-6 py-20 sm:px-10">
+        <Reveal>
+          <p className="mb-4 font-mono text-[12px] tracking-[0.1em] text-wine-ash-soft">
+            EXPERIENCE
+          </p>
+          <h2 className="mb-3 text-[32px] font-extrabold tracking-tight sm:text-[38px]">
+            Experience
+          </h2>
+          <p className="mb-12 max-w-xl text-[15px] text-muted">
+            Where I put frontend engineering into practice.
+          </p>
+        </Reveal>
+
+        {EXPERIENCE.map((entry) => (
+          <Reveal key={entry.role} delay={0.08} direction="scale">
+            <TiltCard max={3} className="rounded-2xl bg-onyx p-8 sm:p-10">
+              <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-cosmic/40 px-3 py-1 font-mono text-[10.5px] tracking-wide text-cosmic">
+                {entry.status.toUpperCase()}
+              </span>
+              <h3 className="text-[22px] font-bold">{entry.role}</h3>
+              <p className="mt-1 text-[15px] text-muted">
+                {entry.company} · {entry.dates}
+              </p>
+              <StaggerGroup as="ul" className="mt-6 flex flex-col gap-3" gap={0.08}>
+                {entry.bullets.map((b) => (
+                  <StaggerItem
+                    as="li"
+                    key={b}
+                    direction="left"
+                    className="relative pl-5 text-[13.5px] leading-relaxed text-ink/85"
+                  >
+                    <span className="absolute left-0 text-cosmic">—</span>
+                    {b}
+                  </StaggerItem>
+                ))}
+              </StaggerGroup>
+              <a
+                href={entry.certificateUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-7 inline-block font-mono text-[12px] text-cosmic underline underline-offset-4"
+              >
+                View Certificate of Completion
+              </a>
+            </TiltCard>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}

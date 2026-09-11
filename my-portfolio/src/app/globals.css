@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+:root {
+  /* Wine Stack palette — Round 7: black/grey/wine-red, replacing Carbon
+     Cosmic's violet accent. Token NAMES are kept as-is (carbon/onyx/
+     wine-ash/cosmic/ink/muted/faint) so every existing component class
+     (bg-carbon, text-cosmic, border-wine-ash, etc.) repaints automatically —
+     only the underlying values change. */
+  --color-carbon: #0b0a0c;
+  --color-onyx: #17151a;
+  --color-onyx-2: #0f0d10;
+  --color-wine-ash: #7a2532;
+  --color-wine-ash-soft: #d98a96;
+  --color-cosmic: #c23b4b;
+  --color-ink: #f2efee;
+  --color-muted: #a79fa0;
+  --color-faint: #6b6468;
+
+  --background: var(--color-carbon);
+  --foreground: var(--color-ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-carbon: var(--color-carbon);
+  --color-onyx: var(--color-onyx);
+  --color-onyx-2: var(--color-onyx-2);
+  --color-wine-ash: var(--color-wine-ash);
+  --color-wine-ash-soft: var(--color-wine-ash-soft);
+  --color-cosmic: var(--color-cosmic);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-faint: var(--color-faint);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-dm-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+}
+
+/* ---- Border beam: a thin comet of light continuously circling a rounded
+   edge. Pure CSS via an animated conic-gradient angle (no JS, no library). */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+.beam {
+  position: relative;
+  isolation: isolate;
+}
+
+.beam::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    transparent 270deg,
+    rgba(194, 59, 75, 0.95) 320deg,
+    #f2efee 340deg,
+    rgba(194, 59, 75, 0.95) 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-spin 3.6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam::before {
+    animation: none;
+  }
+}
+
+/* Quieter beam variant — same mechanism, dimmer/slower/wine-toned, so
+   secondary cards read as part of the same system without competing with
+   the featured card's brighter cosmic sweep. */
+.beam-soft {
+  position: relative;
+  isolation: isolate;
+}
+
+.beam-soft::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    transparent 280deg,
+    rgba(217, 138, 150, 0.75) 322deg,
+    #f2efee 340deg,
+    rgba(217, 138, 150, 0.75) 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-spin 5.4s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam-soft::before {
+    animation: none;
+  }
+}
+
+/* ---- Shimmer sweep: a soft diagonal highlight looping across a button. */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -160% 0;
+  }
+  100% {
+    background-position: 260% 0;
+  }
+}
+
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    rgba(237, 234, 230, 0.22) 48%,
+    transparent 61%
+  );
+  background-size: 220% 100%;
+  animation: shimmer-sweep 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-btn::after {
+    animation: none;
+  }
+}
+
+/* ---- Idle float / sway on the character. */
+@keyframes idle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes idle-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.4deg);
+  }
+}
+
+.idle-float {
+  animation: idle-float 6s ease-in-out infinite;
+}
+
+.idle-sway {
+  animation: idle-sway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .idle-float,
+  .idle-sway {
+    animation: none;
+  }
+}
+
+/* ---- Wine-red ambient glow: a soft color bloom BEHIND a card via box-shadow
+   only. Deliberately not a backdrop-blur/glassmorphism — every card's own
+   content stays perfectly sharp; only the space around it glows. */
+.glow-card {
+  box-shadow:
+    0 30px 60px -18px rgba(160, 30, 45, 0.45),
+    0 0 0 1px rgba(194, 59, 75, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none !important;
+  }
+}
+
+/* ---- Hero card stack: two fixed-tilt "glass" panels (front hero card, back
+   stats card peeking behind), matching the reference's floating-screens look.
+   Flattened on narrow screens, where a 3D tilt on a nearly full-width card
+   just clips content rather than reading as depth. */
+.stack-front {
+  transform: perspective(1600px) rotateX(4deg) rotateY(6deg) rotateZ(1deg);
+}
+
+.stack-back {
+  transform: perspective(1600px) rotateX(7deg) rotateY(-9deg) rotateZ(-1.4deg);
+}
+
+@media (max-width: 639px) {
+  .stack-front,
+  .stack-back {
+    transform: none;
+  }
+}
+
+/* ---- Browser autofill: Chrome/Safari force a white input background the
+   instant a field is autofilled, ignoring our own bg-* class entirely. The
+   long-transition-delay trick below is the only reliable override — it
+   swaps the fill for our onyx surface instead of flashing white. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-ink);
+  caret-color: var(--color-ink);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-onyx) inset;
+  box-shadow: 0 0 0px 1000px var(--color-onyx) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
