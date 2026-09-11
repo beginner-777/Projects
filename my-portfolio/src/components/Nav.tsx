@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PROFILE } from "@/data/profile";
+import Magnetic from "@/components/motion/Magnetic";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -43,17 +44,19 @@ export default function Nav() {
               </Link>
             );
           })}
-          <Link
-            href="/contact"
-            className={`flex items-center gap-1.5 rounded-full border px-4 py-2 transition-colors ${
-              pathname.startsWith("/contact")
-                ? "border-ink/40 text-ink"
-                : "border-ink/20 text-ink hover:border-ink/40"
-            }`}
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-wine-ash" aria-hidden />
-            Contact
-          </Link>
+          <Magnetic strength={8}>
+            <Link
+              href="/contact"
+              className={`flex items-center gap-1.5 rounded-full border px-4 py-2 transition-colors ${
+                pathname.startsWith("/contact")
+                  ? "border-ink/40 text-ink"
+                  : "border-ink/20 text-ink hover:border-ink/40"
+              }`}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-wine-ash" aria-hidden />
+              Contact
+            </Link>
+          </Magnetic>
         </nav>
       </div>
     </header>

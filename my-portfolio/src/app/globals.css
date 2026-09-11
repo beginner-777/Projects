@@ -236,6 +236,28 @@ body {
   }
 }
 
+/* ---- Tech ticker: a slim, continuously-scrolling strip of the real
+   shipped stack. Pure CSS keyframe loop — no JS animation engine involved
+   (see Reveal.tsx for why that matters in this stack). */
+@keyframes tech-ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-ticker-track {
+  animation: tech-ticker-scroll 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-ticker-track {
+    animation: none;
+  }
+}
+
 /* ---- Browser autofill: Chrome/Safari force a white input background the
    instant a field is autofilled, ignoring our own bg-* class entirely. The
    long-transition-delay trick below is the only reliable override — it

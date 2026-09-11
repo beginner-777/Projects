@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { PROFILE } from "@/data/profile";
+import Magnetic from "@/components/motion/Magnetic";
 
 const PROJECT_TYPES = [
   "Website Development",
@@ -140,13 +141,15 @@ export default function ContactForm() {
       </div>
 
       <div className="mt-2 flex items-center gap-5">
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="shimmer-btn glow-card rounded-[10px] bg-cosmic px-7 py-3.5 text-[14px] font-bold text-carbon disabled:opacity-60"
-        >
-          {status === "sending" ? "Sending…" : "Send a message"}
-        </button>
+        <Magnetic strength={status === "sending" ? 0 : 10}>
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="shimmer-btn glow-card rounded-[10px] bg-cosmic px-7 py-3.5 text-[14px] font-bold text-carbon disabled:opacity-60"
+          >
+            {status === "sending" ? "Sending…" : "Send a message"}
+          </button>
+        </Magnetic>
         {status === "error" && (
           <p role="status" className="text-[13px] text-wine-ash-soft">
             Something went wrong — try again, or email me directly.

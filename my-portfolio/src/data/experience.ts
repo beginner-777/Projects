@@ -7,6 +7,10 @@ export interface ExperienceEntry {
   dates: string;
   bullets: string[];
   certificateUrl: string;
+  /** Counted directly from this entry's own bullets — not new claims,
+   *  just the same facts surfaced as scannable numbers for the timeline
+   *  card's stat strip. */
+  stats: { label: string; value: string }[];
 }
 
 export const EXPERIENCE: ExperienceEntry[] = [
@@ -22,5 +26,10 @@ export const EXPERIENCE: ExperienceEntry[] = [
       "Closed navigation and responsiveness defects via cross-device testing, documented in Git/GitHub and Vercel release notes",
     ],
     certificateUrl: "https://musfirah.vercel.app/certificate-of-completion.pdf",
+    stats: [
+      { value: "2", label: "Live AI capstones shipped" },
+      { value: "6", label: "Technologies applied" },
+      { value: "0", label: "Client credentials in browser code" },
+    ],
   },
 ];

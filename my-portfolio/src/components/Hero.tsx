@@ -4,6 +4,7 @@ import { PROJECTS } from "@/data/projects";
 import { EXPERIENCE } from "@/data/experience";
 import HeroCharacter from "@/components/HeroCharacter";
 import AmbientGlow from "@/components/motion/AmbientGlow";
+import Magnetic from "@/components/motion/Magnetic";
 
 export default function Hero() {
   return (
@@ -55,24 +56,32 @@ export default function Hero() {
                   <br />
                   Musfirah.
                 </h1>
-                <p className="mt-4 text-[13.5px] leading-relaxed text-muted">
+                <p className="mt-3 text-[15px] font-bold leading-snug text-ink sm:text-[16px]">
+                  I build <span className="text-cosmic">AI-powered interfaces</span> that
+                  ship — a Gemini-backed incident workspace, a live paid client site.
+                </p>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-muted">
                   {PROFILE.bio}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    href="/work"
-                    className="shimmer-btn rounded-[9px] bg-cosmic px-6 py-3 text-[12.5px] font-extrabold text-carbon"
-                  >
-                    See the work
-                  </Link>
-                  <a
-                    href={PROFILE.contact.resumeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-[9px] border border-ink/[0.18] px-5 py-[10px] text-[12.5px] font-semibold text-ink transition-colors hover:border-ink/40"
-                  >
-                    Résumé
-                  </a>
+                  <Magnetic strength={10}>
+                    <Link
+                      href="/work"
+                      className="shimmer-btn block rounded-[9px] bg-cosmic px-6 py-3 text-[12.5px] font-extrabold text-carbon"
+                    >
+                      See the work
+                    </Link>
+                  </Magnetic>
+                  <Magnetic strength={10}>
+                    <a
+                      href={PROFILE.contact.resumeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block rounded-[9px] border border-ink/[0.18] px-5 py-[10px] text-[12.5px] font-semibold text-ink transition-colors hover:border-ink/40"
+                    >
+                      Résumé
+                    </a>
+                  </Magnetic>
                 </div>
               </div>
 
