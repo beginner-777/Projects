@@ -148,13 +148,21 @@
   .pop-div{ position:relative; z-index:2; width:100px; height:1px; margin:16px auto; background:linear-gradient(90deg,transparent,currentColor,transparent); opacity:.6; }
   .pop-fields{ position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; }
   .pop-field .k{ font-family:'Cinzel Decorative', serif; font-size:10px; letter-spacing:2.5px; opacity:.75; }
-  .pop-field .v{ font-size:17px; margin-top:4px; padding-bottom:6px; border-bottom:1px solid currentColor; opacity:.9; }
-  .pop-map{ position:relative; z-index:2; display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:13px; letter-spacing:1px; text-decoration:none; color:inherit; border:1px solid currentColor; border-radius:999px; padding:8px 16px; opacity:.9; }
-  .pop-map svg{ width:14px; height:14px; }
+  .pop-field .v{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:20px; letter-spacing:.3px;
+    font-variant-numeric: lining-nums; margin-top:5px; padding-bottom:7px; border-bottom:1.5px solid currentColor; opacity:1; }
+  .pop-field.type-time .v{ color:var(--accent-date); }
+  .pop-field.type-venue .v{ color:var(--accent-venue); }
+  .pop-map{ position:relative; z-index:2; display:inline-flex; align-items:center; gap:7px; margin-top:8px; font-family:'Cormorant Garamond', serif;
+    font-weight:600; font-size:15px; letter-spacing:1.2px; font-variant-numeric: lining-nums; text-decoration:none; color:var(--accent-map);
+    border:1.5px solid var(--accent-map); border-radius:999px; padding:9px 18px; opacity:1; }
+  .pop-map svg{ width:15px; height:15px; }
 
-  .pal-mehndi{ background: linear-gradient(165deg,#caa02c 0%,#5c460d 85%); color:#fbf0d6; }
-  .pal-baraat{ background: linear-gradient(165deg,#5c1023 0%,#280610 85%); color:#f2dca0; }
-  .pal-walima{ background: linear-gradient(165deg,#d8c7ae 0%,#8f7a68 85%); color:#3a2e22; }
+  .pal-mehndi{ background: linear-gradient(165deg,#caa02c 0%,#5c460d 85%); color:#fbf0d6;
+    --accent-date:#4a0e1a; --accent-venue:#3a2506; --accent-map:#5c1808; }
+  .pal-baraat{ background: linear-gradient(165deg,#5c1023 0%,#280610 85%); color:#f2dca0;
+    --accent-date:#ffe9a8; --accent-venue:#e8d5a8; --accent-map:#f0b48a; }
+  .pal-walima{ background: linear-gradient(165deg,#d8c7ae 0%,#8f7a68 85%); color:#3a2e22;
+    --accent-date:#4a0e1a; --accent-venue:#3a2506; --accent-map:#5c1808; }
 
   .close-btn{ position:relative; z-index:3; width:42px; height:42px; border-radius:50%; margin:20px auto 0;
     background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 60%, #8a6b1c); display:flex; align-items:center; justify-content:center;
@@ -274,6 +282,7 @@
 
 <!-- hidden event-music players (YouTube IFrame API) -->
 <div style="position:fixed; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none;">
+  <div id="yt-envelope"></div>
   <div id="yt-mehndi"></div>
   <div id="yt-baraat"></div>
   <div id="yt-walima"></div>
@@ -286,10 +295,10 @@
       title: 'MEHNDI', subtitle: 'Festivities Begin',
       photo: 'mehndi-couple.jpg', paletteClass: 'pal-mehndi', corner: 'mehndi-corner.png',
       fields: [
-        {label:'DATE', value:'October 16, 2026'},
-        {label:'TIME', value:'8:00 PM'},
-        {label:'VENUE', value:'Hotel Royal 1'},
-        {label:'ADDRESS', value:'Model Town Link Rd, G.E.C.H.S. Phase 2, Lahore'}
+        {label:'DATE', value:'October 16, 2026', type:'time'},
+        {label:'TIME', value:'8:00 PM', type:'time'},
+        {label:'VENUE', value:'Hotel Royal Palace No 01', type:'venue'},
+        {label:'ADDRESS', value:'Model Town Link Rd, G.E.C.H.S. Phase 2, Lahore', type:'venue'}
       ],
       mapsUrl: 'https://maps.app.goo.gl/TpZn7gn51RGSjihU9'
     },
@@ -297,12 +306,12 @@
       title: 'BARAAT', subtitle: 'A Royal Procession',
       photo: 'baraat-couple.jpg', paletteClass: 'pal-baraat', corner: 'baraat-corner.png',
       fields: [
-        {label:'DATE', value:'October 17, 2026'},
-        {label:'RECEPTION', value:'7:00 PM'},
-        {label:'DINNER', value:'8:00 PM'},
-        {label:'RUKHSATI', value:'9:30 PM'},
-        {label:'VENUE', value:'Lasani Palace'},
-        {label:'ADDRESS', value:'Harbanspura Road, Taj Bagh Scheme, Lahore'}
+        {label:'DATE', value:'October 17, 2026', type:'time'},
+        {label:'RECEPTION', value:'7:00 PM', type:'time'},
+        {label:'DINNER', value:'8:00 PM', type:'time'},
+        {label:'RUKHSATI', value:'9:30 PM', type:'time'},
+        {label:'VENUE', value:'Lasani Palace', type:'venue'},
+        {label:'ADDRESS', value:'Harbanspura Road, Taj Bagh Scheme, Lahore', type:'venue'}
       ],
       mapsUrl: 'https://maps.app.goo.gl/ib36q1yvefhEP2VH6'
     },
@@ -310,10 +319,10 @@
       title: 'WALIMA', subtitle: 'The Reception',
       photo: 'walima-couple.jpg', paletteClass: 'pal-walima', corner: null,
       fields: [
-        {label:'DATE', value:'October 18, 2026'},
-        {label:'TIME', value:'7:00 PM'},
-        {label:'VENUE', value:'Marabelle by Zafar Group'},
-        {label:'ADDRESS', value:'Garrison County Golf Club, Lahore'}
+        {label:'DATE', value:'October 18, 2026', type:'time'},
+        {label:'TIME', value:'7:00 PM', type:'time'},
+        {label:'VENUE', value:'Marabelle by Zafar Group', type:'venue'},
+        {label:'ADDRESS', value:'Garrison County Golf Club, Lahore', type:'venue'}
       ],
       mapsUrl: 'https://maps.app.goo.gl/5p8CtenFUNExftwp8'
     }
@@ -365,6 +374,7 @@
   function openEnvelope(){
     if(opened) return;
     opened = true;
+    playEventMusic('envelope', 24);
     document.getElementById('envelope').classList.add('open');
     spawnParticles();
     setTimeout(()=>{ showStage('stage-reveal'); }, 1250);
@@ -389,7 +399,7 @@
                      <img class="pop-corner bl" src="${d.corner}"><img class="pop-corner br" src="${d.corner}">`;
     }
     const fieldsHtml = d.fields.map(f => `
-      <div class="pop-field"><div class="k">${f.label}</div><div class="v">${f.value}</div></div>
+      <div class="pop-field type-${f.type || 'venue'}"><div class="k">${f.label}</div><div class="v">${f.value}</div></div>
     `).join('');
     const mapHtml = d.mapsUrl ? `<div style="text-align:center; position:relative; z-index:2;">
       <a class="pop-map" href="${d.mapsUrl}" target="_blank" rel="noopener">
@@ -420,10 +430,11 @@
   }
 
   /* ---------- EVENT MUSIC (YouTube IFrame API) ---------- */
-  const ytVideoIds = { mehndi:'djhzGmy7Jmw', baraat:'I3lv6orp7ZA', walima:'7HDmBvgjASQ' };
+  const ytVideoIds = { envelope:'bF8cwOvHW3M', mehndi:'djhzGmy7Jmw', baraat:'I3lv6orp7ZA', walima:'7HDmBvgjASQ' };
   let ytPlayers = {};
   let ytReady = false;
   let pendingPlayKey = null;
+  let pendingStartAt = 0;
   let currentPlayingKey = null;
   let musicMuted = false;
 
@@ -438,7 +449,7 @@
             toCreate--;
             if(toCreate===0){
               ytReady = true;
-              if(pendingPlayKey){ const k=pendingPlayKey; pendingPlayKey=null; playEventMusic(k); }
+              if(pendingPlayKey){ const k=pendingPlayKey, s=pendingStartAt; pendingPlayKey=null; pendingStartAt=0; playEventMusic(k,s); }
             }
           }
         }
@@ -446,14 +457,15 @@
     });
   }
 
-  function playEventMusic(key){
-    if(!ytReady){ pendingPlayKey = key; return; }
+  function playEventMusic(key, startAt){
+    startAt = startAt || 0;
+    if(!ytReady){ pendingPlayKey = key; pendingStartAt = startAt; return; }
     Object.keys(ytPlayers).forEach(k=>{
       if(k!==key){ try{ ytPlayers[k].pauseVideo(); }catch(e){} }
     });
     try{
       const p = ytPlayers[key];
-      p.seekTo(0);
+      p.seekTo(startAt, true);
       if(musicMuted) p.mute(); else p.unMute();
       p.playVideo();
       currentPlayingKey = key;
@@ -464,15 +476,6 @@
       try{ ytPlayers[currentPlayingKey].pauseVideo(); }catch(e){}
     }
     currentPlayingKey = null;
-  }
-  function toggleSound(e){
-    e.stopPropagation();
-    musicMuted = !musicMuted;
-    const btn = document.getElementById('soundToggle');
-    if(btn) btn.textContent = musicMuted ? '🔇' : '🔊';
-    if(currentPlayingKey && ytPlayers[currentPlayingKey]){
-      try{ musicMuted ? ytPlayers[currentPlayingKey].mute() : ytPlayers[currentPlayingKey].unMute(); }catch(e){}
-    }
   }
 
   function toggleCredit(e){
