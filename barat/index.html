@@ -249,6 +249,13 @@
   </div>
 </div>
 
+<!-- hidden event-music players (YouTube IFrame API) -->
+<div style="position:fixed; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none;">
+  <div id="yt-envelope"></div>
+  <div id="yt-baraat"></div>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
   const eventData = {
     baraat: {
@@ -312,6 +319,7 @@
   function openEnvelope(){
     if(opened) return;
     opened = true;
+    playEventMusic('envelope', 24);
     document.getElementById('envelope').classList.add('open');
     spawnParticles();
     setTimeout(()=>{ showStage('stage-reveal'); }, 1250);
@@ -356,10 +364,60 @@
     `;
     document.getElementById('popupOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
+    playEventMusic(key);
   }
   function closePopup(){
     document.getElementById('popupOverlay').classList.remove('show');
     document.body.style.overflow = '';
+    stopEventMusic();
+  }
+
+  /* ---------- EVENT MUSIC (YouTube IFrame API) ---------- */
+  const ytVideoIds = { envelope:'bF8cwOvHW3M', baraat:'I3lv6orp7ZA' };
+  let ytPlayers = {};
+  let ytReady = false;
+  let pendingPlayKey = null;
+  let pendingStartAt = 0;
+  let currentPlayingKey = null;
+
+  function onYouTubeIframeAPIReady(){
+    let toCreate = Object.keys(ytVideoIds).length;
+    Object.keys(ytVideoIds).forEach(key=>{
+      ytPlayers[key] = new YT.Player('yt-'+key, {
+        height:'0', width:'0', videoId: ytVideoIds[key],
+        playerVars:{ autoplay:0, controls:0, disablekb:1, modestbranding:1, playsinline:1, rel:0 },
+        events:{
+          onReady:function(){
+            toCreate--;
+            if(toCreate===0){
+              ytReady = true;
+              if(pendingPlayKey){ const k=pendingPlayKey, s=pendingStartAt; pendingPlayKey=null; pendingStartAt=0; playEventMusic(k,s); }
+            }
+          }
+        }
+      });
+    });
+  }
+
+  function playEventMusic(key, startAt){
+    startAt = startAt || 0;
+    if(!ytReady){ pendingPlayKey = key; pendingStartAt = startAt; return; }
+    Object.keys(ytPlayers).forEach(k=>{
+      if(k!==key){ try{ ytPlayers[k].pauseVideo(); }catch(e){} }
+    });
+    try{
+      const p = ytPlayers[key];
+      p.seekTo(startAt, true);
+      p.unMute();
+      p.playVideo();
+      currentPlayingKey = key;
+    }catch(e){}
+  }
+  function stopEventMusic(){
+    if(currentPlayingKey && ytPlayers[currentPlayingKey]){
+      try{ ytPlayers[currentPlayingKey].pauseVideo(); }catch(e){}
+    }
+    currentPlayingKey = null;
   }
 
   function toggleCredit(e){
