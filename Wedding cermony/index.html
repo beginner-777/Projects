@@ -140,7 +140,8 @@
   .pop-corner{ position:absolute; width:70px; opacity:.9; z-index:1; }
   .pop-corner.tl{ top:2px; left:2px; } .pop-corner.tr{ top:2px; right:2px; transform:scaleX(-1); }
   .pop-corner.bl{ bottom:2px; left:2px; transform:scaleY(-1); } .pop-corner.br{ bottom:2px; right:2px; transform:scale(-1,-1); }
-  .pop-photo{ width:150px; height:150px; margin:6px auto 14px; border-radius:50%; overflow:hidden; position:relative; z-index:2; }
+  .pop-photo-wrap{ width:150px; margin:6px auto 14px; position:relative; z-index:2; }
+  .pop-photo{ width:150px; height:150px; border-radius:50%; overflow:hidden; position:relative; }
   .pop-photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 24%; }
   .pop-title{ position:relative; z-index:2; text-align:center; font-family:'Cinzel Decorative', serif; font-size:26px; letter-spacing:7px; }
   .pop-sub{ position:relative; z-index:2; text-align:center; font-style:italic; font-size:13px; opacity:.85; margin-top:4px; }
@@ -271,6 +272,14 @@
   </div>
 </div>
 
+<!-- hidden event-music players (YouTube IFrame API) -->
+<div style="position:fixed; width:0; height:0; overflow:hidden; opacity:0; pointer-events:none;">
+  <div id="yt-mehndi"></div>
+  <div id="yt-baraat"></div>
+  <div id="yt-walima"></div>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
   const eventData = {
     mehndi: {
@@ -279,10 +288,10 @@
       fields: [
         {label:'DATE', value:'October 16, 2026'},
         {label:'TIME', value:'8:00 PM'},
-        {label:'VENUE', value:'Hotel New Royal Palace'},
-        {label:'ADDRESS', value:'53 Khayaban-e-Firdousi, Block A, Phase 1, Johar Town, Lahore'}
+        {label:'VENUE', value:'Hotel Royal 1'},
+        {label:'ADDRESS', value:'Model Town Link Rd, G.E.C.H.S. Phase 2, Lahore'}
       ],
-      mapsUrl: 'https://maps.app.goo.gl/JyZgeT3uwiKWp3xV6'
+      mapsUrl: 'https://maps.app.goo.gl/TpZn7gn51RGSjihU9'
     },
     baraat: {
       title: 'BARAAT', subtitle: 'A Royal Procession',
@@ -304,7 +313,7 @@
         {label:'DATE', value:'October 18, 2026'},
         {label:'TIME', value:'7:00 PM'},
         {label:'VENUE', value:'Marabelle by Zafar Group'},
-        {label:'ADDRESS', value:'Saddar Town, Lahore'}
+        {label:'ADDRESS', value:'Garrison County Golf Club, Lahore'}
       ],
       mapsUrl: 'https://maps.app.goo.gl/5p8CtenFUNExftwp8'
     }
@@ -390,7 +399,9 @@
     card.innerHTML = `
       <div class="popup-frame"></div>
       ${cornersHtml}
-      <div class="pop-photo"><img src="${d.photo}"></div>
+      <div class="pop-photo-wrap">
+        <div class="pop-photo"><img src="${d.photo}"></div>
+      </div>
       <div class="pop-title">${d.title}</div>
       <div class="pop-sub">${d.subtitle}</div>
       <div class="pop-div"></div>
@@ -400,10 +411,68 @@
     `;
     document.getElementById('popupOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
+    playEventMusic(key);
   }
   function closePopup(){
     document.getElementById('popupOverlay').classList.remove('show');
     document.body.style.overflow = '';
+    stopEventMusic();
+  }
+
+  /* ---------- EVENT MUSIC (YouTube IFrame API) ---------- */
+  const ytVideoIds = { mehndi:'djhzGmy7Jmw', baraat:'I3lv6orp7ZA', walima:'7HDmBvgjASQ' };
+  let ytPlayers = {};
+  let ytReady = false;
+  let pendingPlayKey = null;
+  let currentPlayingKey = null;
+  let musicMuted = false;
+
+  function onYouTubeIframeAPIReady(){
+    let toCreate = Object.keys(ytVideoIds).length;
+    Object.keys(ytVideoIds).forEach(key=>{
+      ytPlayers[key] = new YT.Player('yt-'+key, {
+        height:'0', width:'0', videoId: ytVideoIds[key],
+        playerVars:{ autoplay:0, controls:0, disablekb:1, modestbranding:1, playsinline:1, rel:0 },
+        events:{
+          onReady:function(){
+            toCreate--;
+            if(toCreate===0){
+              ytReady = true;
+              if(pendingPlayKey){ const k=pendingPlayKey; pendingPlayKey=null; playEventMusic(k); }
+            }
+          }
+        }
+      });
+    });
+  }
+
+  function playEventMusic(key){
+    if(!ytReady){ pendingPlayKey = key; return; }
+    Object.keys(ytPlayers).forEach(k=>{
+      if(k!==key){ try{ ytPlayers[k].pauseVideo(); }catch(e){} }
+    });
+    try{
+      const p = ytPlayers[key];
+      p.seekTo(0);
+      if(musicMuted) p.mute(); else p.unMute();
+      p.playVideo();
+      currentPlayingKey = key;
+    }catch(e){}
+  }
+  function stopEventMusic(){
+    if(currentPlayingKey && ytPlayers[currentPlayingKey]){
+      try{ ytPlayers[currentPlayingKey].pauseVideo(); }catch(e){}
+    }
+    currentPlayingKey = null;
+  }
+  function toggleSound(e){
+    e.stopPropagation();
+    musicMuted = !musicMuted;
+    const btn = document.getElementById('soundToggle');
+    if(btn) btn.textContent = musicMuted ? '🔇' : '🔊';
+    if(currentPlayingKey && ytPlayers[currentPlayingKey]){
+      try{ musicMuted ? ytPlayers[currentPlayingKey].mute() : ytPlayers[currentPlayingKey].unMute(); }catch(e){}
+    }
   }
 
   function toggleCredit(e){
